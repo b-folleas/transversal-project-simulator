@@ -4,7 +4,7 @@ public class MapItem {
     private String id;
     private String posX;
     private String posY;
-    private String ground;
+    private Ground ground;
 
     public String getId() {
         return id;
@@ -30,11 +30,11 @@ public class MapItem {
         this.posY = posY;
     }
 
-    public String getGround() {
+    public Ground getGround() {
         return ground;
     }
 
-    public void setGround(String ground) {
+    public void setGround(Ground ground) {
         this.ground = ground;
     }
 }

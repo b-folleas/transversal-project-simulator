@@ -29,6 +29,7 @@ public class RestService {
     }
 
 
+
     public List<Incident> getIncidents() {
         return this.webClient
                 .get()

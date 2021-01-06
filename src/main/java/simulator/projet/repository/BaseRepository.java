@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -14,16 +15,27 @@ public abstract class BaseRepository<T> {
 
     private final WebClient webClient;
 
+    private WebClient WebClientManager;
+
+    private final String baseUrlManager;
+
+
     /**
      * Initialize the webclient for the API
      *
      * @param baseUrl url to find the api location
      */
-    public BaseRepository(String baseUrl) {
+    public BaseRepository(String baseUrl, String baseUrlManager) {
+        this.baseUrlManager = baseUrlManager ;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
+    }
+
+
+    public List<T> getList(String url) {
+        return getList( url, false);
     }
 
     /**
@@ -32,9 +44,10 @@ public abstract class BaseRepository<T> {
      * @param url url to find the resource
      * @return a list of T instance
      */
-    public List<T> getList(String url) {
+    public List<T> getList(String url, boolean isManagerApi) {
         logger.info("HTTP Get for list at the url : " + url);
-        return this.webClient
+
+        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
                 .get()
                 .uri(url)
                 .retrieve()
@@ -43,21 +56,52 @@ public abstract class BaseRepository<T> {
                 .block();
     }
 
+    private WebClient getWebClientManager() {
+       if ( WebClientManager == null ) {
+            this.WebClientManager = WebClient.builder()
+                    .baseUrl(baseUrlManager)
+                    .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                    .build();
+       }
+        return this.WebClientManager ;
+    }
+
+
+
+    public T getItem(String url) {
+        return getItem( url, false);
+    }
+
     /**
      * Get a item from the url
      *
      * @param url url to find the resource
      * @return this T object instance
      */
-    public T getItem(String url) {
+    public T getItem(String url, boolean isManagerApi) {
         logger.info("HTTP Get for item at the url : " + url);
-        return this.webClient
+        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
                 .get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(this.getClassObject())
                 .block();
     }
+
+
+    public T postItem(String url, T item) { return postItem(url, item , false );}
+
+    public T postItem(String url, T item ,  boolean isManagerApi){
+        logger.info("Posting item at url : " + url ) ;
+        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+                .post()
+                .uri(url)
+                .body(Mono.just(item), this.getClassObject() )
+                .retrieve()
+                .bodyToMono(this.getClassObject())
+                .block();
+    }
+
 
     /**
      * Get the Class lt;Tgt; object

@@ -9,4 +9,7 @@ public interface ITruckRepository {
     List<Truck> getTrucks();
 
     Truck getTruck(int id);
-}
+
+    Truck createTruck(Truck truck);
+
+    }

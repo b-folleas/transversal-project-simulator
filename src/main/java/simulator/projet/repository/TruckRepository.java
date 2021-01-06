@@ -9,9 +9,10 @@ import java.util.List;
 @Component
 public class TruckRepository extends BaseRepository<Truck> implements ITruckRepository {
 
-    public TruckRepository(@Value("${api.baseUrl}") String baseUrl) {
-        super(baseUrl);
+    public TruckRepository(@Value("${api.baseUrl}") String baseUrl, @Value("${api.baseUrlManager}") String baseUrlManager) {
+        super(baseUrl,baseUrlManager);
     }
+
 
     @Override
     Class<Truck> getClassObject() {
@@ -21,6 +22,12 @@ public class TruckRepository extends BaseRepository<Truck> implements ITruckRepo
     @Override
     public List<Truck> getTrucks() {
         return this.getList("/trucks");
+    }
+
+
+    @Override
+    public Truck createTruck(Truck truck) {
+        return this.postItem("/truck", truck );
     }
 
     @Override

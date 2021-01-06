@@ -1,11 +1,14 @@
 package simulator.projet.model;
 
+import java.util.List;
+
 public class Truck {
 
     private int id;
     private MapItem mapItem;
     private Barrack barrack;
     private boolean availability;
+    private List<Incident> incidents;
     private int matricule;
 
     public int getId() {
@@ -24,6 +27,14 @@ public class Truck {
         this.mapItem = mapItem;
     }
 
+    public List<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(List<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
     public Barrack getBarrack() {
         return barrack;
     }
@@ -40,13 +51,15 @@ public class Truck {
         this.availability = availability;
     }
 
+
+
     public int getMatricule() {
         return matricule;
     }
-
     public void setMatricule(int matricule) {
         this.matricule = matricule;
     }
+
 
     @Override
     public String toString() {
@@ -55,7 +68,9 @@ public class Truck {
                 ", mapItem=" + mapItem +
                 ", barrack=" + barrack +
                 ", availability=" + availability +
+                ", incidents=" + incidents +
                 ", matricule=" + matricule +
                 '}';
     }
+
 }

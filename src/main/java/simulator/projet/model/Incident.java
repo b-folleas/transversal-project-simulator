@@ -3,7 +3,7 @@ package simulator.projet.model;
 public class Incident {
     private int id;
     private MapItem mapItem;
-    private String incidentType;
+    private IncidentType incidentType;
     private int intensity;
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Incident {
         this.mapItem = mapItem;
     }
 
-    public String getIncidentType() {
+    public IncidentType getIncidentType() {
         return incidentType;
     }
 
-    public void setIncidentType(String incidentType) {
+    public void setIncidentType(IncidentType incidentType) {
         this.incidentType = incidentType;
     }
 
