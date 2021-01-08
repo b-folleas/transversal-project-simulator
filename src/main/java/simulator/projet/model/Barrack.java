@@ -28,4 +28,21 @@ public class Barrack {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Barrack( ) {
+    }
+
+    public Barrack( String name, MapItem mapItem) {
+        this.name = name;
+        this.mapItem = mapItem;
+    }
+
+    @Override
+    public String toString() {
+        return "Barrack{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", mapItem=" + mapItem +
+                '}';
+    }
 }

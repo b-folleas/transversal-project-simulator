@@ -2,15 +2,41 @@ package simulator.projet.repository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import simulator.projet.model.Truck;
+import simulator.projet.model.viewModel.TruckViewModel;
+import simulator.projet.repository.Irepository.ITruckRepository;
 
 import java.util.List;
 
-@Component
+@Service
 public class TruckRepository extends BaseRepository<Truck> implements ITruckRepository {
 
     public TruckRepository(@Value("${api.baseUrl}") String baseUrl, @Value("${api.baseUrlManager}") String baseUrlManager) {
         super(baseUrl,baseUrlManager);
+    }
+
+
+
+    @Override
+    public List<Truck> getTrucks() {
+        return this.getList("/trucks", true);
+    }
+
+
+    @Override
+    public Truck createTruck(TruckViewModel truck) {
+        return this.postItem("/truck", truck, TruckViewModel.class , true);
+    }
+
+    @Override
+    public Truck updateTruck(int truck_id, int posX, int posY ) {
+        return this.postItem("/truck/" + truck_id +"/posx/" + posX  + "/posy/" + posY,"" ,Truck.class , true);
+    }
+
+    @Override
+    public Truck getTruck(int id) {
+        return this.getItem("/truck/" + id, true) ;
     }
 
 
@@ -19,19 +45,4 @@ public class TruckRepository extends BaseRepository<Truck> implements ITruckRepo
         return Truck.class;
     }
 
-    @Override
-    public List<Truck> getTrucks() {
-        return this.getList("/trucks");
-    }
-
-
-    @Override
-    public Truck createTruck(Truck truck) {
-        return this.postItem("/truck", truck );
-    }
-
-    @Override
-    public Truck getTruck(int id) {
-        return this.getItem("/truck/" + id);
-    }
 }

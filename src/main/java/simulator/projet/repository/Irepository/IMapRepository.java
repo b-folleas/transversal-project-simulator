@@ -1,11 +1,10 @@
-package simulator.projet.repository;
+package simulator.projet.repository.Irepository;
 
 import org.springframework.stereotype.Service;
 import simulator.projet.model.MapItem;
 
 import java.util.List;
 
-@Service
 public interface IMapRepository {
 
     List<MapItem> getMapItems();

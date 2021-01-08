@@ -2,6 +2,8 @@ package simulator.projet.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RandomService {
 
@@ -14,4 +16,9 @@ public class RandomService {
         return  r.nextInt(high-low) + low;
     }
 
+
+    public int randIndex(List<?> list) {
+        java.util.Random r = new java.util.Random();
+        return r.nextInt(list.size());
+    }
 }

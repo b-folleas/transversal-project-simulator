@@ -60,6 +60,21 @@ public class Truck {
         this.matricule = matricule;
     }
 
+    public Truck() {
+
+    }
+
+    public Truck(int id, MapItem mapItem, Barrack barrack, boolean availability, List<Incident> incidents, int matricule) {
+        this.id = id;
+        this.mapItem = mapItem;
+        this.barrack = barrack;
+        this.availability = availability;
+        this.incidents = incidents;
+        this.matricule = matricule;
+    }
+
+
+
 
     @Override
     public String toString() {

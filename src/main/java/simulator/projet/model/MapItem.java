@@ -2,8 +2,8 @@ package simulator.projet.model;
 
 public class MapItem {
     private String id;
-    private String posX;
-    private String posY;
+    private Integer posX;
+    private Integer posY;
     private Ground ground;
 
     public String getId() {
@@ -14,19 +14,19 @@ public class MapItem {
         this.id = id;
     }
 
-    public String getPosX() {
+    public Integer getPosX() {
         return posX;
     }
 
-    public void setPosX(String posX) {
+    public void setPosX(Integer posX) {
         this.posX = posX;
     }
 
-    public String getPosY() {
+    public Integer getPosY() {
         return posY;
     }
 
-    public void setPosY(String posY) {
+    public void setPosY(Integer posY) {
         this.posY = posY;
     }
 
@@ -36,5 +36,15 @@ public class MapItem {
 
     public void setGround(Ground ground) {
         this.ground = ground;
+    }
+
+    @Override
+    public String toString() {
+        return "MapItem{" +
+                "id='" + id + '\'' +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                ", ground=" + ground +
+                '}';
     }
 }

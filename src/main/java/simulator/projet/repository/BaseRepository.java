@@ -89,14 +89,27 @@ public abstract class BaseRepository<T> {
     }
 
 
-    public T postItem(String url, T item) { return postItem(url, item , false );}
+    public T postItem(String url, Object item, Class<?> classItem) { return postItem(url, item ,classItem,  false );}
 
-    public T postItem(String url, T item ,  boolean isManagerApi){
+    public T postItem(String url, Object item , Class<?> classItem,   boolean isManagerApi){
         logger.info("Posting item at url : " + url ) ;
         return ( isManagerApi ? this.getWebClientManager() : this.webClient )
                 .post()
                 .uri(url)
-                .body(Mono.just(item), this.getClassObject() )
+                .body(Mono.just(item), classItem )
+                .retrieve()
+                .bodyToMono(this.getClassObject())
+                .block();
+    }
+
+    public T putItem(String url, Object item, Class<?> classItem) { return postItem(url, item ,classItem,  false );}
+
+    public T putItem(String url, Object item , Class<?> classItem,   boolean isManagerApi){
+        logger.info("Putting item at url : " + url ) ;
+        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+                .put()
+                .uri(url)
+                .body(Mono.just(item), classItem )
                 .retrieve()
                 .bodyToMono(this.getClassObject())
                 .block();
