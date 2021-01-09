@@ -10,8 +10,8 @@ public interface IIncidentRepository {
 
     List<Incident> getIncidents();
 
-    Incident createIncident( IncidentViewModel item );
+    Incident createIncident(IncidentViewModel item);
 
-    Incident updateIncidentIntensity(Incident incident, int new_intensity ) ;
+    Incident updateIncidentIntensity(Incident incident, int new_intensity);
 
-    }
+}

@@ -1,6 +1,8 @@
 package simulator.projet.model;
 
-public enum IncidentType {
+import java.io.Serializable;
+
+public enum IncidentType implements Serializable {
     FLOOD("FLOOD"),
     FIRE("FIRE"),
     ACCIDENT("ACCIDENT"),

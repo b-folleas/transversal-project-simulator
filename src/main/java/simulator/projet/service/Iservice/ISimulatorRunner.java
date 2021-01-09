@@ -1,6 +1,6 @@
 package simulator.projet.service.Iservice;
 
 public interface ISimulatorRunner {
-    void runner() throws InterruptedException ;
+    void runner() throws InterruptedException;
 
-    }
+}

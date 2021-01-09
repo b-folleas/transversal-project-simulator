@@ -11,11 +11,11 @@ import java.util.List;
 public class MapRepository extends BaseRepository<MapItem> implements IMapRepository {
 
     public MapRepository(@Value("${api.baseUrl}") String baseUrl, @Value("${api.baseUrlManager}") String baseUrlManager) {
-        super(baseUrl,baseUrlManager);
+        super(baseUrl, baseUrlManager);
     }
 
     @Override
-    public List<MapItem> getMapItems(){
+    public List<MapItem> getMapItems() {
         return this.getList("/mapItems");
     }
 

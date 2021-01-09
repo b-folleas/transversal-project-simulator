@@ -8,12 +8,11 @@ import java.util.List;
 public class RandomService {
 
 
-
     public int randInt(int high) {
         java.util.Random r = new java.util.Random();
         int low = 1;
         high += 1;
-        return  r.nextInt(high-low) + low;
+        return r.nextInt(high - low) + low;
     }
 
 

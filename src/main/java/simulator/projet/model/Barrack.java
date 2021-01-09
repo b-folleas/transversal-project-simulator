@@ -1,9 +1,20 @@
 package simulator.projet.model;
 
-public class Barrack {
-    private int id;
+import java.io.Serializable;
+
+public class Barrack implements Serializable {
+
+    private Long id;
     private String name;
     private MapItem mapItem;
+
+    public Barrack() {
+    }
+
+    public Barrack(String name, MapItem mapItem) {
+        this.name = name;
+        this.mapItem = mapItem;
+    }
 
     public String getName() {
         return name;
@@ -21,20 +32,12 @@ public class Barrack {
         this.mapItem = mapItem;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Barrack( ) {
-    }
-
-    public Barrack( String name, MapItem mapItem) {
-        this.name = name;
-        this.mapItem = mapItem;
     }
 
     @Override

@@ -15,6 +15,13 @@ public class IncidentViewModel implements Serializable {
 
     }
 
+    public IncidentViewModel(int posX, int posY, float intensity, IncidentType incidentType) {
+        this.posX = posX;
+        this.posY = posY;
+        this.intensity = intensity;
+        this.incidentType = incidentType;
+    }
+
     public int getPosX() {
         return posX;
     }
@@ -44,13 +51,6 @@ public class IncidentViewModel implements Serializable {
     }
 
     public void setIncidentType(IncidentType incidentType) {
-        this.incidentType = incidentType;
-    }
-
-    public IncidentViewModel( int posX, int posY, float intensity, IncidentType incidentType) {
-        this.posX = posX;
-        this.posY = posY;
-        this.intensity = intensity;
         this.incidentType = incidentType;
     }
 

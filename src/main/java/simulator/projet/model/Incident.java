@@ -1,16 +1,18 @@
 package simulator.projet.model;
 
-public class Incident {
-    private int id;
+import java.io.Serializable;
+
+public class Incident implements Serializable {
+    private Long id;
     private MapItem mapItem;
     private IncidentType incidentType;
     private int intensity;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

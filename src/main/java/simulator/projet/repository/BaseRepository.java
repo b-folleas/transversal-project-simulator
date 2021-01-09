@@ -14,10 +14,8 @@ public abstract class BaseRepository<T> {
     private final Logger logger = LoggerFactory.getLogger(BaseRepository.class);
 
     private final WebClient webClient;
-
-    private WebClient WebClientManager;
-
     private final String baseUrlManager;
+    private WebClient WebClientManager;
 
 
     /**
@@ -26,7 +24,7 @@ public abstract class BaseRepository<T> {
      * @param baseUrl url to find the api location
      */
     public BaseRepository(String baseUrl, String baseUrlManager) {
-        this.baseUrlManager = baseUrlManager ;
+        this.baseUrlManager = baseUrlManager;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +33,7 @@ public abstract class BaseRepository<T> {
 
 
     public List<T> getList(String url) {
-        return getList( url, false);
+        return getList(url, false);
     }
 
     /**
@@ -47,7 +45,7 @@ public abstract class BaseRepository<T> {
     public List<T> getList(String url, boolean isManagerApi) {
         logger.info("HTTP Get for list at the url : " + url);
 
-        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+        return (isManagerApi ? this.getWebClientManager() : this.webClient)
                 .get()
                 .uri(url)
                 .retrieve()
@@ -57,19 +55,18 @@ public abstract class BaseRepository<T> {
     }
 
     private WebClient getWebClientManager() {
-       if ( WebClientManager == null ) {
+        if (WebClientManager == null) {
             this.WebClientManager = WebClient.builder()
                     .baseUrl(baseUrlManager)
                     .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .build();
-       }
-        return this.WebClientManager ;
+        }
+        return this.WebClientManager;
     }
 
 
-
     public T getItem(String url) {
-        return getItem( url, false);
+        return getItem(url, false);
     }
 
     /**
@@ -80,7 +77,7 @@ public abstract class BaseRepository<T> {
      */
     public T getItem(String url, boolean isManagerApi) {
         logger.info("HTTP Get for item at the url : " + url);
-        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+        return (isManagerApi ? this.getWebClientManager() : this.webClient)
                 .get()
                 .uri(url)
                 .retrieve()
@@ -89,27 +86,31 @@ public abstract class BaseRepository<T> {
     }
 
 
-    public T postItem(String url, Object item, Class<?> classItem) { return postItem(url, item ,classItem,  false );}
+    public T postItem(String url, Object item, Class<?> classItem) {
+        return postItem(url, item, classItem, false);
+    }
 
-    public T postItem(String url, Object item , Class<?> classItem,   boolean isManagerApi){
-        logger.info("Posting item at url : " + url ) ;
-        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+    public T postItem(String url, Object item, Class<?> classItem, boolean isManagerApi) {
+        logger.info("Posting item at url : " + url);
+        return (isManagerApi ? this.getWebClientManager() : this.webClient)
                 .post()
                 .uri(url)
-                .body(Mono.just(item), classItem )
+                .body(Mono.just(item), classItem)
                 .retrieve()
                 .bodyToMono(this.getClassObject())
                 .block();
     }
 
-    public T putItem(String url, Object item, Class<?> classItem) { return postItem(url, item ,classItem,  false );}
+    public T putItem(String url, Object item, Class<?> classItem) {
+        return postItem(url, item, classItem, false);
+    }
 
-    public T putItem(String url, Object item , Class<?> classItem,   boolean isManagerApi){
-        logger.info("Putting item at url : " + url ) ;
-        return ( isManagerApi ? this.getWebClientManager() : this.webClient )
+    public T putItem(String url, Object item, Class<?> classItem, boolean isManagerApi) {
+        logger.info("Putting item at url : " + url);
+        return (isManagerApi ? this.getWebClientManager() : this.webClient)
                 .put()
                 .uri(url)
-                .body(Mono.just(item), classItem )
+                .body(Mono.just(item), classItem)
                 .retrieve()
                 .bodyToMono(this.getClassObject())
                 .block();

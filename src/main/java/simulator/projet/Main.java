@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import simulator.projet.repository.Irepository.IMapRepository;
-import simulator.projet.service.Iservice.*;
+import simulator.projet.service.Iservice.ISimulatorInitializer;
+import simulator.projet.service.Iservice.ISimulatorRunner;
 
 @Component
 public class Main implements CommandLineRunner {

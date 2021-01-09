@@ -12,17 +12,17 @@ import java.util.List;
 public class BarrackRepository extends BaseRepository<Barrack> implements IBarrackRepository {
 
     public BarrackRepository(@Value("${api.baseUrl}") String baseUrl, @Value("${api.baseUrlManager}") String baseUrlManager) {
-        super(baseUrl,baseUrlManager);
+        super(baseUrl, baseUrlManager);
     }
 
     @Override
     public List<Barrack> getBarracks() {
-        return this.getList( "/barracks" , true);
+        return this.getList("/barracks", true);
     }
 
     @Override
     public Barrack createBarrack(BarrackViewModel barrack) {
-        return this.postItem("/barrack", barrack , BarrackViewModel.class,  true);
+        return this.postItem("/barrack", barrack, BarrackViewModel.class, true);
     }
 
     @Override

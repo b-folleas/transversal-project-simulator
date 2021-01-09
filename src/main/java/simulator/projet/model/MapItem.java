@@ -1,16 +1,18 @@
 package simulator.projet.model;
 
-public class MapItem {
-    private String id;
+import java.io.Serializable;
+
+public class MapItem implements Serializable {
+    private Long id;
     private Integer posX;
     private Integer posY;
     private Ground ground;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

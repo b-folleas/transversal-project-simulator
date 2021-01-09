@@ -1,21 +1,35 @@
 package simulator.projet.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Truck {
+public class Truck implements Serializable {
 
-    private int id;
+    private Long id;
     private MapItem mapItem;
     private Barrack barrack;
     private boolean availability;
     private List<Incident> incidents;
     private int matricule;
 
-    public int getId() {
+    public Truck(Long id, MapItem mapItem, Barrack barrack, boolean availability, List<Incident> incidents, int matricule) {
+        this.id = id;
+        this.mapItem = mapItem;
+        this.barrack = barrack;
+        this.availability = availability;
+        this.incidents = incidents;
+        this.matricule = matricule;
+    }
+
+    public Truck() {
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,30 +65,13 @@ public class Truck {
         this.availability = availability;
     }
 
-
-
     public int getMatricule() {
         return matricule;
     }
+
     public void setMatricule(int matricule) {
         this.matricule = matricule;
     }
-
-    public Truck() {
-
-    }
-
-    public Truck(int id, MapItem mapItem, Barrack barrack, boolean availability, List<Incident> incidents, int matricule) {
-        this.id = id;
-        this.mapItem = mapItem;
-        this.barrack = barrack;
-        this.availability = availability;
-        this.incidents = incidents;
-        this.matricule = matricule;
-    }
-
-
-
 
     @Override
     public String toString() {

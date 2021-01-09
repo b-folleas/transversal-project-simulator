@@ -1,6 +1,5 @@
 package simulator.projet.repository.Irepository;
 
-import org.springframework.stereotype.Service;
 import simulator.projet.model.Truck;
 import simulator.projet.model.viewModel.TruckViewModel;
 
@@ -11,10 +10,10 @@ public interface ITruckRepository {
 
     List<Truck> getTrucks();
 
-    Truck getTruck(int id);
+    Truck getTruck(Long id);
 
     Truck createTruck(TruckViewModel truck);
 
-    Truck updateTruck(int truck_id, int posX, int posY) ;
+    Truck updateTruck(Long truck_id, int posX, int posY);
 
-    }
+}

@@ -1,6 +1,8 @@
 package simulator.projet.model;
 
-public enum Ground {
+import java.io.Serializable;
+
+public enum Ground implements Serializable {
     ROAD("ROAD"),
     GARDEN("ROAD"),
     BUILDING("BUILDING"),
@@ -8,12 +10,12 @@ public enum Ground {
 
     private final String text;
 
-    public String getText() {
-        return text;
-    }
-
     Ground(final String text) {
         this.text = text;
+    }
+
+    public String getText() {
+        return text;
     }
 
     @Override

@@ -5,7 +5,7 @@ import simulator.projet.model.Truck;
 
 public interface ITruckToMove {
 
-     void moveTruck(Truck truck) ;
+    void moveTruck(Truck truck);
 
 
 }

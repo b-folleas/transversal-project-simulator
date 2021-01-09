@@ -20,13 +20,10 @@ public class IncidentChecker implements IIncidentChecker {
 
     private static final Logger logger = LoggerFactory.getLogger(IncidentChecker.class);
     private final RandomService randomService;
-
-
-    @Value("${incidentRate}")
-    private int incidentRate;
-
     private final IIncidentRepository incidentRepository;
     private final IMapRepository mapRepository;
+    @Value("${incidentRate}")
+    private int incidentRate;
     private List<Incident> incidentList;
     private List<MapItem> mapItemsList;
 
@@ -36,8 +33,10 @@ public class IncidentChecker implements IIncidentChecker {
         this.randomService = randomService;
     }
 
-    /*
-     * Renvoie une liste de map item sur lesquels seront cree les incident
+    /**
+     * Renvoie une liste incidentViewModel qui vont être créé par la suite
+     *
+     * @return
      */
     public List<IncidentViewModel> incidentsToGenerate() {
         incidentList = incidentRepository.getIncidents();

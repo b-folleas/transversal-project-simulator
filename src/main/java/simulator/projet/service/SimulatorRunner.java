@@ -54,7 +54,6 @@ public class SimulatorRunner implements ISimulatorRunner {
             // recuperation et traitement des incidents
             List<Incident> incidentToDecreaseIntensity_list = incidentToOff.fetchIncidentsToOff();
             for (Incident incidentItem : incidentToDecreaseIntensity_list) {
-
                 Incident newIncident = incidentRepository.updateIncidentIntensity(incidentItem, incidentItem.getIntensity() - 1);
                 logger.info("Updated Incident from {} to {}", incidentItem, newIncident);
             }

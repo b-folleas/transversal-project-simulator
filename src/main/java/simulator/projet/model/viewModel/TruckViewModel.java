@@ -13,6 +13,14 @@ public class TruckViewModel implements Serializable {
     private boolean availability;
     private Barrack barrack;
 
+    public TruckViewModel(int posX, int posY, int matricule, boolean availability, Barrack barrack) {
+        this.posX = posX;
+        this.posY = posY;
+        this.matricule = matricule;
+        this.availability = availability;
+        this.barrack = barrack;
+    }
+
     public int getPosX() {
         return posX;
     }
@@ -50,14 +58,6 @@ public class TruckViewModel implements Serializable {
     }
 
     public void setBarrack(Barrack barrack) {
-        this.barrack = barrack;
-    }
-
-    public TruckViewModel(int posX, int posY, int matricule, boolean availability, Barrack barrack) {
-        this.posX = posX;
-        this.posY = posY;
-        this.matricule = matricule;
-        this.availability = availability;
         this.barrack = barrack;
     }
 }
