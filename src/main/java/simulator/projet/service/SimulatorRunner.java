@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import simulator.projet.model.Incident;
+import simulator.projet.model.IncidentToIncreaseModel;
 import simulator.projet.model.Truck;
 import simulator.projet.model.viewModel.IncidentViewModel;
 import simulator.projet.repository.Irepository.IIncidentRepository;
 import simulator.projet.repository.Irepository.ITruckRepository;
 import simulator.projet.service.Iservice.IIncidentChecker;
+import simulator.projet.service.Iservice.IIncidentToIncrease;
 import simulator.projet.service.Iservice.ISimulatorRunner;
 import simulator.projet.service.Iservice.ITruckToMove;
 
@@ -24,6 +26,7 @@ public class SimulatorRunner implements ISimulatorRunner {
     private final IncidentToOff incidentToOff;
     private final ITruckToMove truckToMove;
     private final ITruckRepository truckRepository;
+    private final IIncidentToIncrease incidentToIncrease;
 
     @Value("${clockRate}")
     private int clockRate;
@@ -32,12 +35,14 @@ public class SimulatorRunner implements ISimulatorRunner {
                            IIncidentRepository incidentRepository,
                            IncidentToOff incidentToOff,
                            ITruckToMove truckToMove,
-                           ITruckRepository truckRepository) {
+                           ITruckRepository truckRepository,
+                           IIncidentToIncrease incidentToIncrease) {
         this.incidentChecker = incidentChecker;
         this.incidentRepository = incidentRepository;
         this.incidentToOff = incidentToOff;
         this.truckToMove = truckToMove;
         this.truckRepository = truckRepository;
+        this.incidentToIncrease = incidentToIncrease;
     }
 
     public void runner() throws InterruptedException {
@@ -54,7 +59,12 @@ public class SimulatorRunner implements ISimulatorRunner {
             // recuperation et traitement des incidents
             List<Incident> incidentToDecreaseIntensity_list = incidentToOff.fetchIncidentsToOff();
             for (Incident incidentItem : incidentToDecreaseIntensity_list) {
-                Incident newIncident = incidentRepository.updateIncidentIntensity(incidentItem, incidentItem.getIntensity() - 1);
+                Incident newIncident = incidentRepository.updateIncidentIntensity(incidentItem.getId(), incidentItem.getIntensity() - 1);
+                logger.info("Updated Incident from {} to {}", incidentItem, newIncident);
+            }
+            List<IncidentToIncreaseModel> incidentToIncreaseIntensity_List = incidentToIncrease.needToIncrease();
+            for (IncidentToIncreaseModel incidentItem : incidentToIncreaseIntensity_List) {
+                Incident newIncident = incidentRepository.updateIncidentIntensity(incidentItem.getIdIncident(), incidentItem.getIntensity());
                 logger.info("Updated Incident from {} to {}", incidentItem, newIncident);
             }
 

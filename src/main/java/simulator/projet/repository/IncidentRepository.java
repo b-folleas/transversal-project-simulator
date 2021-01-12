@@ -26,8 +26,8 @@ public class IncidentRepository extends BaseRepository<Incident> implements IInc
     }
 
     @Override
-    public Incident updateIncidentIntensity(Incident incident, int newIntensity) {
-        return this.postItem("/incident/" + incident.getId() + "/intensity/" + newIntensity, "", IncidentViewModel.class);
+    public Incident updateIncidentIntensity(Long incident_id, int newIntensity) {
+        return this.postItem("/incident/" + incident_id + "/intensity/" + newIntensity, "", IncidentViewModel.class);
     }
 
     @Override

@@ -12,6 +12,6 @@ public interface IIncidentRepository {
 
     Incident createIncident(IncidentViewModel item);
 
-    Incident updateIncidentIntensity(Incident incident, int new_intensity);
+    Incident updateIncidentIntensity(Long incident_id, int new_intensity);
 
 }
